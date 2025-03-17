@@ -1,0 +1,98 @@
+= Publish test results
+
+Use this action to publish test results from tools such as MSTest, ProdPerfect, JUnit, TestNG, Go test, Jest, Playwright, Selenium and Tosca to CBP
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+
+| Input name
+| Data type
+| Required
+| Description
+
+| `cloudbees-url`
+| String
+| Yes
+| The CloudBees platform URL. Typically, this value is `"https://api.cloudbees.io"`.
+
+| `cloudbees-pat`
+| String
+| Yes
+| The CloudBees platform personal access token.
+
+| `test-type`
+| String
+| Yes
+| The name of the test tool.
+
+| `folder-path`
+| String
+| Yes
+| The pattern, file, or directory path of the test report to convert.
+
+|===
+
+== Supported tools
+
+[cols="1a,1a",options="header"]
+.Supported test-type with inputs
+|===
+
+| Supported test-type
+| Input format
+
+| MSTest
+| mstest / MSTEST
+
+| ProdPerfect
+| prodperfect / PRODPERFECT
+
+| JUnit
+| junit / JUNIT
+
+| TestNG
+| testng / TESTNG
+
+| GO
+| go / GO
+
+| Jest
+| jest / JEST
+
+| Playwright
+| playwright / PLAYWRIGHT
+
+| Selenium
+| selenium / SELENIUM
+
+| Tosca
+| tosca / TOSCA
+
+|===
+
+== Usage example
+
+In your YAML file, add:
+
+[source,yaml]
+----
+    - name: Publish test results
+      uses: cloudbees-gha-cbp/publish-test-results@v1
+      with:
+        test-type: JUnit
+        folder-path: /example/mytest
+
+----
+== License
+
+This code is made available under the 
+link:https://opensource.org/license/mit/[MIT license].
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/actions[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/[the CloudBees platform].
+
