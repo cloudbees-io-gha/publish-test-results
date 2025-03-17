@@ -1,0 +1,25 @@
+name: 'Publish Test Results'
+description: 'Convert and publishes the test results association with the workflow run'
+
+inputs:
+  cloudbees-url:
+    description: 'The CloudBees platform URL.'
+    required: true
+  cloudbees-pat:
+    description: 'The CloudBees platform personal access token.'
+    required: true
+  test-type:
+    description: 'Test Type indicating testing tool report that needs conversion.'
+    required: true
+  folder-path:
+    description: 'Folder name/File path for the location of the test reports.'
+    required: true
+
+runs:
+  using: "docker"
+  image: "docker://ghcr.io/srimanpadmanabancb/gha-action/gha-publish-test-results-action:latest"
+  env:
+    CLOUDBEES_API_URL: ${{ inputs.cloudbees-url }}
+    CLOUDBEES_API_TOKEN: ${{ inputs.cloudbees-pat }}
+    TEST_TYPE: ${{ inputs.test-type }}
+    FOLDER_PATH: ${{ inputs.folder-path }}
