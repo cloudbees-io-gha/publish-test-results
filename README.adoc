@@ -14,11 +14,6 @@ This action supports many popular testing tools, and enables testing results fro
 | Required
 | Description
 
-| `cloudbees-url`
-| String
-| No
-| The CloudBees platform URL. Typically, this value is `"https://api.cloudbees.io"`.
-
 | `cloudbees-pat`
 | String
 | Yes
@@ -34,6 +29,10 @@ This action supports many popular testing tools, and enables testing results fro
 | Yes
 | The pattern, file, or directory path of the test report to convert.
 
+| `cloudbees-url`
+| String
+| No
+| The CloudBees platform URL. Typically, this value is `"https://api.cloudbees.io"`.
 |===
 
 ^[1]^ The testing tool name must be formatted correctly, in either all lowercase, or all uppercase.
@@ -104,7 +103,6 @@ steps:
       - name: publish GHA run test results
         uses: cloudbees-gha-cbp/publish-test-results@v1
         with:
-          cloudbees-url: "https://api.cloudbees.io"
           cloudbees-pat: ${{ secrets.CloudBees-platform-PAT }}
           test-type: junit
           folder-path: /example-dir/my-test-results
