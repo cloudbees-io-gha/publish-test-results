@@ -5,7 +5,7 @@ This action supports many popular testing tools, and enables testing results fro
 
 == Inputs
 
-[cols="2a,1a,1a,3a",options="header"]
+[cols="22%a,15%a,15%a,48%a",options="header"]
 .Input details
 |===
 
@@ -190,6 +190,6 @@ link:https://opensource.org/license/mit/[MIT license].
 
 == References
 
-* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/actions[using actions in CloudBees workflows].
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/using-a-different-ci/github-actions/[Using GitHub Actions with the CloudBees platform].
 * Learn about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/[the CloudBees platform].
 
