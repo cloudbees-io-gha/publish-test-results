@@ -15,7 +15,7 @@ Use this action to publish test results from tools such as MSTest, ProdPerfect, 
 
 | `cloudbees-url`
 | String
-| Yes
+| No
 | The CloudBees platform URL. Typically, this value is `"https://api.cloudbees.io"`.
 
 | `cloudbees-pat`
