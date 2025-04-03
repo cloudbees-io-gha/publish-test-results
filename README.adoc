@@ -1,10 +1,11 @@
-= Publish test results
+= Publish test results to the CloudBees platform
 
-Use this action to publish test results from tools such as MSTest, ProdPerfect, JUnit, TestNG, Go test, Jest, Playwright, Selenium and Tosca to CBP
+Use this action to publish test results if you are using a GitHub Actions (GHA) workflow.
+This action supports many popular testing tools, and enables testing results from running a GHA workflow to be displayed in the link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/workflows/test-results[Test results] tab of *Run details* and in the link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/analytics/test-insights[Test insights] analytics dashboard.
 
 == Inputs
 
-[cols="2a,1a,1a,3a",options="header"]
+[cols="22%a,15%a,15%a,48%a",options="header"]
 .Input details
 |===
 
@@ -13,79 +14,173 @@ Use this action to publish test results from tools such as MSTest, ProdPerfect, 
 | Required
 | Description
 
-| `cloudbees-url`
-| String
-| No
-| The CloudBees platform URL. Typically, this value is `"https://api.cloudbees.io"`.
-
 | `cloudbees-pat`
 | String
 | Yes
-| The CloudBees platform personal access token.
+| The link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/workflows/personal-access-token[CloudBees platform personal access token].
 
 | `test-type`
 | String
 | Yes
-| The name of the test tool.
+| The name of the testing tool^[1]^.
 
 | `folder-path`
 | String
 | Yes
 | The pattern, file, or directory path of the test report to convert.
 
+| `cloudbees-url`
+| String
+| No
+| The CloudBees platform URL. Typically, this value is `"https://api.cloudbees.io"`.
 |===
 
-== Supported tools
+^[1]^ The testing tool name must be formatted correctly, in either all lowercase, or all uppercase.
 
-[cols="1a,1a",options="header"]
-.Supported test-type with inputs
+== Supported testing tools
+
+NOTE: Only the testing tools listed in the table below are supported for use in this action.
+
+Use the given `test-type` input format to specify a testing tool.
+
+[cols="40%a,30%a,30%a"]
+.Supported testing tool names and `test-type` format
 |===
+h| Supported tool name
+2+h| Accepted `test-type` input formats
 
-| Supported test-type
-| Input format
-
-| MSTest
-| mstest / MSTEST
-
-| ProdPerfect
-| prodperfect / PRODPERFECT
-
-| JUnit
-| junit / JUNIT
-
-| TestNG
-| testng / TESTNG
+|
+| lowercase
+| UPPERCASE
 
 | GO
-| go / GO
+| `go`
+| `GO`
 
 | Jest
-| jest / JEST
+| `jest`
+| `JEST`
+
+| JUnit
+| `junit`
+| `JUNIT`
+
+| MSTest
+| `mstest`
+| `MSTEST`
 
 | Playwright
-| playwright / PLAYWRIGHT
+| `playwright`
+| `PLAYWRIGHT`
+
+| ProdPerfect
+| `prodperfect`
+| `PRODPERFECT`
 
 | Selenium
-| selenium / SELENIUM
+| `selenium`
+| `SELENIUM`
+
+| TestNG
+| `testng`
+| `TESTNG`
 
 | Tosca
-| tosca / TOSCA
+| `tosca`
+| `TOSCA`
 
 |===
 
-== Usage example
+== Usage examples
 
-In your YAML file, add:
+=== Basic example
+
+The following is a basic example of using this action:
 
 [source,yaml]
 ----
-    - name: Publish test results
-      uses: cloudbees-gha-cbp/publish-test-results@v1
-      with:
-        test-type: JUnit
-        folder-path: /example/mytest
+steps:
+      - name: publish GHA run test results
+        uses: cloudbees-gha-cbp/publish-test-results@v1
+        with:
+          cloudbees-pat: ${{ secrets.CloudBees-platform-PAT }}
+          test-type: junit
+          folder-path: /example-dir/my-test-results
 
 ----
+
+=== Full workflow and run example
+
+The following GHA workflow example uses this action to publish test results to the CloudBees platform.
+
+.Example GHA workflow YAML file
+[.collapsible]
+--
+
+[source, yaml,role="default-expanded"]
+----
+name: GHA Workflow
+
+on:
+    workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compile code
+        run: echo "Compiling..."
+
+      - name: Produce binary
+        run: sleep 10
+
+      - name: Push binary
+        run: echo "Pushing binary to ECR..."
+
+      - name: Register build artifacts in Cloudbees platform
+        uses: cloudbees-gha-cbp/register-build-artifact@v2
+        id: go-action
+        with:
+          name: "GHA app"
+          version: 1.0.0
+          url: "docker.io/example:latest"
+          digest: "sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr"
+          type: "docker"
+          cloudbees-url: "https://api.cloudbees.io"
+          cloudbees-pat: ${{ secrets.CBP_PAT }}
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build]   # Depends on 'build' job
+    steps:
+      - name: Run tests
+        run: echo "Running tests..."
+
+      - name: Checkout to collect test results
+        uses: actions/checkout@v3
+
+      - name: Publish test results in Cloudbees platform
+        uses: cloudbees-gha-cbp/publish-test-results@v1
+        with:
+          test-type: GO
+          folder-path: test_reports/*
+          cloudbees-url: "https://api.cloudbees.io"
+          cloudbees-pat: ${{ secrets.CBP_PAT }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build,test]   # Depends on 'build' and 'test' jobs
+    steps:
+      - name: Checkout to prepare manifest
+        uses: actions/checkout@v3
+
+      - name: Trigger deployment
+        run: echo "Invoking CBP deploy workflow..."
+----
+--
+
+After the run has completed, the testing results are collected and displayed in the *Test results* tab of *Run details* and in the *Test insights* dashboard.
+
 == License
 
 This code is made available under the 
@@ -93,6 +188,6 @@ link:https://opensource.org/license/mit/[MIT license].
 
 == References
 
-* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/actions[using actions in CloudBees workflows].
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/using-a-different-ci/github-actions/[Using GitHub Actions with the CloudBees platform].
 * Learn about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/[the CloudBees platform].
 
