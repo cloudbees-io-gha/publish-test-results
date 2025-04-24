@@ -24,7 +24,7 @@ This action supports many popular testing tools, and enables testing results fro
 | Yes
 | The name of the testing tool^[1]^.
 
-| `folder-path`
+| `results-path`
 | String
 | Yes
 | The pattern, file, or directory path of the test report to convert.
@@ -105,7 +105,7 @@ steps:
         with:
           cloudbees-pat: ${{ secrets.CloudBees-platform-PAT }}
           test-type: junit
-          folder-path: /example-dir/my-test-results
+          results-path: /example-dir/my-test-results
 
 ----
 
@@ -163,7 +163,7 @@ jobs:
         uses: cloudbees-gha-cbp/publish-test-results@v1
         with:
           test-type: GO
-          folder-path: test_reports/*
+          results-path: test_reports/*
           cloudbees-url: "https://api.cloudbees.io"
           cloudbees-pat: ${{ secrets.CBP_PAT }}
 
