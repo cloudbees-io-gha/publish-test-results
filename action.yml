@@ -1,4 +1,4 @@
-name: 'Publish test results to the CloudBees platform'
+name: 'Publish test results to Platform'
 description: 'Publish test results from external tools to the CloudBees platform.'
 
 branding:
