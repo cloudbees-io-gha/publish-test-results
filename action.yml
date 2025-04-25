@@ -1,5 +1,9 @@
-name: 'Publish Test Results'
-description: 'Convert and publishes the test results association with the workflow run'
+name: 'Publish test results to Platform'
+description: 'Publish test results from external tools to the CloudBees platform.'
+
+branding:
+  icon: 'command'
+  color: 'purple'
 
 inputs:
   cloudbees-url:
