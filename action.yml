@@ -22,7 +22,7 @@ inputs:
 
 runs:
   using: "docker"
-  image: "docker://public.ecr.aws/l7o7z1g8/actions/gha-publish-test-results:main-2a92b7b76b90ad8bb11f736d0c60a6e9940d1817"
+  image: "docker://public.ecr.aws/l7o7z1g8/actions/gha-publish-test-results:main-65ce88409694f0311743b09d28e70dcc99b1e7de"
   env:
     CLOUDBEES_API_URL: ${{ inputs.cloudbees-url }}
     CLOUDBEES_API_TOKEN: ${{ inputs.cloudbees-pat }}
