@@ -149,7 +149,7 @@ jobs:
           name: "gha-artifact-test"
           version: 1.0.0
           url: "docker.io/example:latest"
-          digest: "sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr"
+          digest: "sha256:1234567890abcdef1234abcd1234567890121234567890abcdef12345678abcd"
           type: "docker"
           cloudbees-url: "https://api.cloudbees.io"
 
