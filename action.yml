@@ -20,6 +20,7 @@ inputs:
 runs:
   using: "docker"
   image: "docker://ghcr.io/karthiknaveene/gha-action/gha-publish-test-results-action:latest"
+  # Equivalent to 020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/gha-publish-test-results:main-e66674fc8ada74ae8b6fa859894387d1c870e039
   env:
     CLOUDBEES_API_URL: ${{ inputs.cloudbees-url }}
     TEST_TYPE: ${{ inputs.test-type }}
