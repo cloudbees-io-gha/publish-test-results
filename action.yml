@@ -18,7 +18,7 @@ inputs:
     required: true
 
 runs:
-  using: "docker"  
+  using: "docker"
   image: "docker://public.ecr.aws/l7o7z1g8/actions/gha-publish-test-results:main-e66674fc8ada74ae8b6fa859894387d1c870e039"  
   env:
     CLOUDBEES_API_URL: ${{ inputs.cloudbees-url }}
