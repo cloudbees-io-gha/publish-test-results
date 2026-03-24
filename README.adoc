@@ -1,11 +1,11 @@
-= Publish test results to the CloudBees platform
+= Publish test results to CloudBees Unify
 
 Use this action to publish test results if you are using a GitHub Actions (GHA) workflow.
 This action supports many popular testing tools, and enables testing results from running a GHA workflow to be displayed in the link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/workflows/test-results[Test results] tab of *Run details* and in the link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/analytics/test-insights[Test insights] analytics dashboard.
 
 == Prerequisites
 
-Set up the CloudBees platform and GHA to work together, providing key features of the platform to GHA workflows.
+Set up CloudBees Unify and GHA to work together, providing key features of the platform to GHA workflows.
 Refer to link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/github-actions/gha-getting-started[Getting started with GHA integration] for more information.
 
 == Inputs
@@ -32,7 +32,7 @@ Refer to link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/github-a
 | `cloudbees-url`
 | String
 | No
-| The CloudBees platform URL. The default value is `"https://api.cloudbees.io"`.
+| CloudBees Unify URL. The default value is `"https://api.cloudbees.io"`.
 |===
 
 ^[1]^ The testing tool name must be formatted correctly, in either all lowercase, or all uppercase.
@@ -113,7 +113,7 @@ steps:
 
 === Full workflow and run example
 
-The following GHA workflow example uses the v2 action to publish test results to the CloudBees platform.
+The following GHA workflow example uses the v2 action to publish test results to CloudBees Unify.
 
 .Example GHA workflow YAML file
 [.collapsible]
@@ -178,7 +178,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Trigger deployment
-        run: echo "Invoking CBP deploy workflow..."
+        run: echo "Invoking CloudBees Unify deploy workflow..."
 ----
 --
 
@@ -191,6 +191,6 @@ link:https://opensource.org/license/mit/[MIT license].
 
 == References
 
-* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/github-actions/intro[Using GitHub Actions with the CloudBees platform].
-* Learn about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/[the CloudBees platform].
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/github-actions/intro[Using GitHub Actions with CloudBees Unify].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/[CloudBees Unify].
 
