@@ -1,5 +1,5 @@
-name: 'Publish test results to Platform'
-description: 'Publish test results from external tools to the CloudBees platform.'
+name: 'Publish test results to Unify'
+description: 'Publish test results from external tools to CloudBees Unify.'
 
 branding:
   icon: 'command'
@@ -7,7 +7,7 @@ branding:
 
 inputs:
   cloudbees-url:
-    description: 'The CloudBees platform URL.'
+    description: 'The CloudBees Unify URL.'
     required: false
     default: "https://api.cloudbees.io"
   test-type:
