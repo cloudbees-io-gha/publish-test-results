@@ -32,7 +32,7 @@ Refer to link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/github-a
 | `cloudbees-url`
 | String
 | No
-| CloudBees Unify URL. The default value is `"https://api.cloudbees.io"`.
+| The CloudBees Unify URL. The default value is `"https://api.cloudbees.io"`.
 |===
 
 ^[1]^ The testing tool name must be formatted correctly, in either all lowercase, or all uppercase.
