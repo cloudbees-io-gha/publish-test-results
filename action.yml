@@ -19,7 +19,7 @@ inputs:
 
 runs:
   using: "docker"
-  image: "docker://public.ecr.aws/l7o7z1g8/actions/gha-publish-test-results:main-c353ee3751ac18c6825a1d1ab7c094aaf32623e5"
+  image: "docker://public.ecr.aws/l7o7z1g8/actions/gha-publish-test-results:main-3057bdfdea77a077eecda897cc2064e3bd847c7a"
   env:
     CLOUDBEES_API_URL: ${{ inputs.cloudbees-url }}
     TEST_TYPE: ${{ inputs.test-type }}
